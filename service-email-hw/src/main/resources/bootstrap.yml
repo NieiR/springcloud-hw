@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: service-email-hw
+  cloud:
+    config:
+      profile: a
+      label: master
+      uri: http://localhost:9006

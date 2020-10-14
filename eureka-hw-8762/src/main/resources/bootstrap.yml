@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cloud-eureka-server
+  cloud:
+    config:
+      profile: b
+      label: master
+      uri: http://localhost:9006

@@ -1,0 +1,18 @@
+server:
+  port: 9006
+spring:
+  application:
+    name: config-hw
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://quellanan.a:8761/eureka/,http://quellanan.b:8762/eureka/
+  instance:
+    prefer-ip-address: true

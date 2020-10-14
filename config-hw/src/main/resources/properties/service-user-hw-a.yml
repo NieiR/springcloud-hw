@@ -1,0 +1,50 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: service-user-hw
+  datasource:
+    url: jdbc:mysql://localhost:3306/springcloud?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://quellanan.a:8761/eureka/,http://quellanan.b:8762/eureka/
+    instance:
+      prefer-ip-address: true
+logging:
+  level:
+    com.lagou.edu.controller.service.ResumeServiceFeignClient: debug
+
+ribbon:
+  ConnectTimeout: 2000
+  ReadTimeout: 3000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+
+feign:
+  hystrix:
+    enabled: false
+  compression:
+  request:
+    enabled: true
+    mime-types: text/html,application/xml,application/json
+    min-request-size: 2048
+  response:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000

@@ -1,0 +1,19 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: service-email-hw
+  mail:
+    host: smtp.qq.com
+    username:
+    password:
+    default-encoding: UTF-8
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://quellanan.a:8761/eureka/,http://quellanan.b:8762/eureka/
+    instance:
+      prefer-ip-address: true
+
+mail:
+  from:

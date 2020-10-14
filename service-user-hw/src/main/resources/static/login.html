@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <style type="text/css">
+        body {
+            background-color:#00b38a;
+            text-align:center;
+        }
+
+        .lp-login {
+            position:absolute;
+            width:500px;
+            height:300px;
+            top:50%;
+            left:50%;
+            margin-top:-250px;
+            margin-left:-250px;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 10px #12a591;
+            padding: 57px 50px 35px;
+            box-sizing: border-box
+        }
+
+
+        .lp-login .submitBtn {
+            display:block;
+            text-decoration:none;
+            height: 48px;
+            width: 150px;
+            line-height: 48px;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+            background-image: -webkit-gradient(linear, left top, right top, from(#09cb9d), to(#02b389));
+            background-image: linear-gradient(90deg, #09cb9d, #02b389);
+            border-radius: 3px
+        }
+
+
+        input[type='text'] {
+            height:30px;
+            width:250px;
+        }
+        input[type='password'] {
+            height:30px;
+            width:250px;
+        }
+
+
+
+
+
+        span {
+            font-style: normal;
+            font-variant-ligatures: normal;
+            font-variant-caps: normal;
+            font-variant-numeric: normal;
+            font-variant-east-asian: normal;
+            font-weight: normal;
+            font-stretch: normal;
+            font-size: 14px;
+            line-height: 22px;
+            font-family: "Hiragino Sans GB", "Microsoft Yahei", SimSun, Arial, "Helvetica Neue", Helvetica;
+        }
+
+    </style>
+
+
+
+    <script>
+        $(function(){
+                $(".submitBtn").bind("click",function(){
+                    var username = $("#username").val();
+                    var password = $("#password").val();
+
+
+                    if(username == null || $.trim(username).length == 0){
+                        alert("sorry,必须输入用户名~");
+                        return;
+                    }
+                    if(password == null || $.trim(password).length == 0){
+                        alert("sorry,必须输入密码");
+                        return;
+                    }
+
+                    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+                    //正则验证不通过，格式不对
+                    if(!reg.test(username)){
+                        alert("邮箱格式不正确");
+                        return;
+                    }
+
+                    $.ajax({
+                        url:'http://localhost/api/user/login/'+username+'/'+password,
+                        type:'POST',    //GET
+                        timeout:5000,    //超时时间
+                        success:function(data){
+                            if(data!=""){
+                                window.location.href = "http://localhost/static/welcome.html";
+                            }else{
+                                alert("登录失败~~~,账号密码错误" );
+                                return;
+                            }
+                        }
+                    })
+                })
+            }
+        )
+    </script>
+
+</head>
+
+<body>
+
+
+<form>
+    <table class="lp-login">
+        <tr>
+            <td align="right"><span>邮箱</span></td>
+            <td align="center">
+                <input type="text" id="username">
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><span>密码</span></td>
+            <td align="center">
+                <input type="password"  id="password" >
+            </td>
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <button type="button"  class="submitBtn"><span>登 录</span></button>
+            </td>
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <a href="register.html">注册新账号</a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+
+</html>

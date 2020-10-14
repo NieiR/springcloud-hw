@@ -1,0 +1,33 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: gateway-hw
+  redis:
+    host: 127.0.01
+    port: 6379
+    password:
+  cloud:
+    gateway:
+      routes:
+        - id: user
+          uri: lb://service-user-hw
+          predicates:
+            - Path=/user/**
+        - id: code
+          uri: lb://service-code-hw
+          predicates:
+            - Path=/code/**
+        - id: email
+          uri: lb://service-email-hw
+          predicates:
+            - Path=/email/**
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://quellanan.a:8761/eureka/,http://quellanan.b:8762/eureka/
+    instance:
+      prefer-ip-address: true
+limit:
+  time: 1
+  count: 1
